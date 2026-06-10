@@ -6,6 +6,16 @@ export default defineConfig({
   worker: {
     format: 'es',
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          recharts: ['recharts'],
+          framer: ['framer-motion'],
+        },
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
