@@ -33,11 +33,10 @@ self.onmessage = async (e: MessageEvent<WorkerInMessage>) => {
     let population: Chromosome[]
     let gen: number
 
-    const allPlayers = generatePlayers(50, msg.seed)
-    // Pick 10 random players for this run
-    const shuffled = [...allPlayers].sort(() => rng() - 0.5)
-    players = shuffled.slice(0, 10)
-    population = initPopulation(config, rng)
+    // The GA operates over the full pool: each chromosome chooses which 10
+    // players are fielded (5 per team) and benches the other 40.
+    players = generatePlayers(50, msg.seed)
+    population = initPopulation(config, rng, players.length)
     gen = 0
 
     while (!stopped && gen < config.maxGenerations) {

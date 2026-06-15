@@ -10,8 +10,12 @@ export function makeRng(seed = Date.now()): () => number {
   }
 }
 
-export function initPopulation(config: GAConfig, rng: () => number): Chromosome[] {
-  return Array.from({ length: config.populationSize }, () => randomChromosome(rng))
+export function initPopulation(
+  config: GAConfig,
+  rng: () => number,
+  poolSize: number
+): Chromosome[] {
+  return Array.from({ length: config.populationSize }, () => randomChromosome(rng, poolSize))
 }
 
 export function evalPopulation(

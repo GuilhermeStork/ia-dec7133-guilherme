@@ -28,9 +28,10 @@ export default function EvolutionChart() {
               label={{ value: 'Geração', position: 'insideBottomRight', offset: -8, fill: '#6B7280', fontSize: 11 }}
             />
             <YAxis
-              domain={[0, 1]}
+              domain={['auto', 'auto']}
               tick={{ fill: '#6B7280', fontSize: 11 }}
-              tickFormatter={v => v.toFixed(2)}
+              tickFormatter={v => v.toFixed(3)}
+              width={48}
             />
             <Tooltip
               contentStyle={{ backgroundColor: '#12161C', border: '1px solid #1E2530', borderRadius: 8 }}

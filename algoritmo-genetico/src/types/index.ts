@@ -9,9 +9,13 @@ export interface Player {
   lurker: number   // 0–10
 }
 
-export type Team = 'A' | 'B'
+export type Team = 'A' | 'B' | '-'   // '-' = banco (jogador não escalado)
 
-/** 10-element array: index = player slot in the selected pool, value = team assignment */
+/**
+ * Uma posição por jogador do pool completo (50). Valor 'A'/'B' = time escalado,
+ * '-' = banco. Restrição: exatamente 5 'A' e 5 'B'; o restante fica no banco.
+ * O AG, portanto, escolhe QUEM joga e em qual time.
+ */
 export type Chromosome = Team[]
 
 export interface GAConfig {
@@ -37,6 +41,6 @@ export interface GAState {
   snapshots: GenerationSnapshot[]
   bestChromosome: Chromosome | null
   players: Player[]          // full pool of 50
-  selectedPlayers: Player[]  // the 10 randomly chosen for the current run
+  selectedPlayers: Player[]  // pool that the chromosome maps over (the full 50)
   config: GAConfig
 }

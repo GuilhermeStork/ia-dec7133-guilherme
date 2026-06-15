@@ -36,7 +36,7 @@ export default function Controls() {
       <div className="flex flex-col gap-4">
         <Slider
           label="Tamanho da população"
-          value={config.populationSize} min={50} max={500} step={10}
+          value={config.populationSize} min={1} max={200} step={1}
           onChange={v => setConfig({ populationSize: v })} disabled={disabled}
         />
         <Slider

@@ -6,11 +6,12 @@ const concepts = [
     id: 'chromosome',
     title: 'Cromossomo',
     icon: '🧬',
-    visual: `[ A  A  A  A  A  B  B  B  B  B ]
-  0  1  2  3  4  5  6  7  8  9
-  ↑ Team Alpha          ↑ Team Bravo`,
+    visual: `[ -  A  -  B  -  -  A  B  -  ... ]   50 posições
+   0  1  2  3  4  5  6  7  8
+   A = Alpha   B = Bravo   - = banco
+   → 5 'A', 5 'B' e os outros 40 no banco`,
     description:
-      'Cada solução é representada por um cromossomo: um array de 10 posições, onde cada posição corresponde a um jogador e o valor (A ou B) indica a qual equipe ele pertence. A restrição é que exatamente 5 jogadores vão para cada time.',
+      'Cada solução é um cromossomo com uma posição por jogador do pool de 50. O valor indica se o jogador está no Time A, no Time B ou no banco (–). A restrição é exatamente 5 no time A e 5 no time B. Ou seja, o AG escolhe ao mesmo tempo QUEM joga e em qual time — não apenas como dividir 10 jogadores fixos.',
   },
   {
     id: 'fitness',
@@ -56,12 +57,13 @@ Filho: [ A  B  A  A  B  A  B  B  A  B ]
     id: 'mutation',
     title: 'Mutação por Troca',
     icon: '🔀',
-    visual: `Antes: [ A  A  A  A  A  B  B  B  B  B ]
-                          ↑swap↑
-Depois: [ A  A  A  B  A  B  B  B  A  B ]
-         ← troca 1 A com 1 B aleatório`,
+    visual: `Reequilíbrio:  troca 1 'A' ⇄ 1 'B'
+Substituição:  escalado ⇄ banco
+
+  [ A  -  B ... ]  →  [ -  A  B ... ]
+    ↑ vai pro banco   ↑ entra do banco`,
     description:
-      'Com probabilidade igual à taxa de mutação, um jogador do Time A e um do Time B trocam de time. Isso mantém a restrição (5×5) e introduz diversidade genética, evitando que o algoritmo fique preso em ótimos locais.',
+      'Com probabilidade igual à taxa de mutação, ocorre uma de duas trocas: reequilíbrio (um jogador do Time A troca com um do Time B) ou substituição (um escalado vai para o banco e um do banco entra). A primeira ajusta a divisão; a segunda muda quem joga. Ambas mantêm a restrição 5×5 e introduzem diversidade, evitando ótimos locais.',
   },
 ]
 
